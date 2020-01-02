@@ -1,0 +1,66 @@
+#include <stdio.h>
+void max_heaply(int arr[],int i,int x){
+    int left=2*i;
+    int max;
+    int right=(2*i)+1;
+    if (left<=x && arr[left-1]>arr[i-1]){
+        max=left;
+    }
+    else{
+        max=i;
+    }
+    if (right<=x && arr[right-1]>arr[max-1]){
+        max=right;
+    }
+    if (max !=i){
+        // printf("%d\n",max);
+        int temp;
+        temp=arr[max-1];
+        arr[max-1]=arr[i-1];
+        arr[i-1]=temp;
+        max_heaply(arr,max,x);
+    }
+}
+void build_max_heaply(int arr[],int x){
+    for (int i=(x/2);i>0;i--){
+        max_heaply(arr,i,x);
+    }
+}
+void heap_sort(int arr[],int x){
+    build_max_heaply(arr,x);
+    for(int j=x;j>1;j--){
+        int z;
+        z=arr[0];
+        arr[0]=arr[x-1];
+        arr[x-1]=z;
+        // printf("%d ",z);
+        x=x-1;
+        // printf("%d ",arr[x]);
+
+        max_heaply(arr,1,x);
+        // printf("%d ",z);
+    }
+    
+    // printf("%d",arr[0]);
+}
+int main() {
+	//code
+	int x;
+	scanf("%d\n",&x);
+	int t=x;
+	int arr[x];
+	for (int i=0;i<x;i++){
+	    scanf("%d",&arr[i]);
+	}
+	heap_sort(arr,x);
+	
+// 	build_max_heaply(arr,x);
+// 	for (int j=0;j<x;j++){
+// 	    printf("%d ",arr[j]);
+// 	}
+// 	max_heaply(arr,3,x);
+for(int j=0;j<t;j++){
+    printf("%d ",arr[j]);
+}
+	return 0;
+}
