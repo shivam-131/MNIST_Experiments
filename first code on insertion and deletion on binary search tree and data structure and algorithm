@@ -1,0 +1,104 @@
+#include <stdio.h> 
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node*left;
+    struct node *right;
+};
+struct node* minimum(struct node* head){
+    while(head->left!=NULL){
+        // return head->data;
+        head=head->left;
+    }
+    // minimum(head->left);
+    return head;
+}
+struct node *insert(struct node *head, int value){
+    if(head==NULL){
+    struct node*shailendra;
+    shailendra=(struct node*)malloc(sizeof(struct node));
+    shailendra->data=value;
+    shailendra->left=NULL;
+    shailendra->right=NULL;
+    // if (head==NULL){
+        head=shailendra;
+    //     // return head;
+    // }
+    }
+    else if(value<=head->data){
+        head->left=insert(head->left,value);
+    }
+    else{
+        head->right=insert(head->right,value);
+    }
+     
+    return head;
+    
+    
+}
+struct node* del(struct node*head,int x){
+    // if(head->data==x){
+    //   if(head->left==NULL && head->right==NULL){
+          
+    //   }                           
+        
+    // }
+    if(head==NULL){
+        return head;
+    }
+    else if(head->data<x){
+        head->right=del(head->right,x);
+    }
+    else if(head->data>x){
+       head->left=del(head->left,x);
+    }
+    else{
+        if(head->left==NULL && head->right==NULL){
+            // head=NULL;
+            // delete head;
+        
+            head=NULL;
+            return head;
+        }
+        else if(head->left==NULL){
+            struct node* shailendra;
+            shailendra=head;
+            head=shailendra->right;
+            free(shailendra);
+            return head;
+        }
+        else if(head->right==NULL){
+            struct node* shailendra;
+            shailendra=head;
+            head=shailendra->left;
+            free(shailendra);
+            return head;
+        }
+        else{
+            struct node* y=minimum(head->right);
+                head->data=y->data;
+                head->right=del(head->right,y->data);
+                return head;
+                
+            
+        }
+    }
+//   return head; 
+}
+int main() {
+	//code
+	int w;
+	struct node* shailendra=NULL;
+	scanf("%d",&w);
+	while(w--){
+	    int x;
+	    scanf("%d",&x);
+	    shailendra=insert(shailendra,x);
+	    
+	}
+// 	shailendra=shailendra->right->right;
+// 	printf("%d",shailendra->data);
+    shailendra=del(shailendra,6);
+    printf("%d",shailendra->left->right->data);
+	return 0;
+}
