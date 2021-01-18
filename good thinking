@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    vector<int>arr;
+    int x;
+    cin>>x;
+    int length=x;
+    while(x--){
+        int r;
+        cin>>r;
+        arr.push_back(r);
+    }
+    int sum;
+    cin>>sum;
+    // vector<vector<int,length>>(dp,sum);
+    vector<vector<int>> dp( length , vector<int> (sum+1, 0));
+    // cout<<dp[0][0];
+    for(int i=0;i<length;i++){
+        int t=arr[i];
+        if(t<=sum){
+          dp[i][arr[i]]=1;
+        }
+        
+    }
+    // vector<vector<int>>shailendra;
+    for(int j=sum;j>=0;j--){
+        int d=j-arr[0];
+        if(d==0){
+            dp[0][j]=1;
+            // shailendra[0][j].push_back(arr[0]);
+        }
+        else{
+            dp[0][j]=0;
+        }
+    }
+    for(int i=1;i<length;i++){
+        for(int j=sum;j>=0;j--){
+            int d=j-arr[i];
+            if(d==0){
+                dp[i][j]=1+dp[i-1][j];
+                
+                // shailendra[i][j].push_back(arr[i]);
+            }
+            else if(d<0){
+                dp[i][j]=dp[i-1][j];
+            }
+            else{
+                dp[i][j]=dp[i-1][d]+dp[i-1][j];
+            }
+        }
+    }
+    // int count=0;
+    // for(int i=0;i<length;i++){
+    //     // if(dp[i][sum]==1){
+    //     //     count++;
+    //     // }
+    //     // if(dp[i][sum]>=1){
+    //     // cout<<i<<sum<<endl;
+    //     // }
+    //     count+=dp[i][sum];
+    // }
+    // cout<<dp[length-1][sum];
+    if(dp[length-1][sum]>=1){
+        cout<<"True";
+    }
+    else{
+        cout<<"False";
+    }
+        // cout<<count;
+    
+	return 0;
+}
