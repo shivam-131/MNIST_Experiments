@@ -1,0 +1,31 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+void dfs(vector<vector<int>>&g,int a,vector<int>V){
+    V[a]=1;
+    cout<<a;
+    for(int i=0;i<g[a].size();i++){
+        if(V[g[a][i]]==0){
+            dfs(g,g[a][i],V);
+        }
+    }
+}
+int main() {
+    vector<vector<int>>g(4);
+     int t;
+     cin>>t;
+     while(t--){
+         int x,y;
+         cin>>x>>y;
+         g[x].push_back(y);
+     }
+    vector<int>V;
+    for(int i=0;i<4;i++){
+        V.push_back(0);
+    }
+    dfs(g,2,V);
+    
+    
+	return 0;
+}
