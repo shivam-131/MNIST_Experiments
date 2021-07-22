@@ -1,0 +1,42 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+vector<int>grap(vector<vector<int>>&g,int a){
+    vector<int>V;
+    for(int i=0;i<4;i++){
+        V.push_back(0);
+    }
+    V[a]=1;
+    vector<int>q;
+    q.push_back(a);
+    vector<int>my;
+    while(q.size()!=0){
+        cout<<q[0];
+        int b=q[0];
+        my.push_back(q[0]);
+        q.erase(q.begin());
+        
+    for(int i=0;i<g[b].size();i++){
+        if(V[g[b][i]]==0){
+            q.push_back(g[b][i]);
+            V[g[b][i]]=1;
+        }
+    }
+    }
+    return my;
+}
+int main() {
+    vector<vector<int>>g(4);
+     int t;
+     cin>>t;
+     while(t--){
+         int x,y;
+         cin>>x>>y;
+         g[x].push_back(y);
+     }
+     vector<int>don;
+     don=grap(g,2);
+    
+    
+	return 0;
+}
