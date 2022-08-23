@@ -1,1 +1,1 @@
-https://colab.research.google.com/drive/1zxxUyTdCsk231mgbSrLIBl_SPhabAuxj
+We trained various models on MNIST datatset and compared accuracy.
